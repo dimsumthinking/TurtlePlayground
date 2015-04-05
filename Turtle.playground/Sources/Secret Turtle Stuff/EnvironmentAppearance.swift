@@ -1,7 +1,7 @@
 import UIKit
 import CoreGraphics
 
-let themeIsDark = true
+let themeIsDark = false
 
 let environmentColor = themeIsDark ? UIColor.blackColor() : UIColor.whiteColor()
 let borderColor = UIColor.darkGrayColor()

@@ -11,7 +11,7 @@ public class Turtle: UIView {
     private var path = UIBezierPath()
     private var paths = [UIBezierPath]()
     private var arrow = UIBezierPath()
-
+   
     private var colors = [initialPathColor]
     private var headingInRadians: Double = 0
     
@@ -34,6 +34,7 @@ public class Turtle: UIView {
             arrow.addLineToPoint(CGPoint(x:arrowCoordinate, y:0))
             arrow.addLineToPoint(CGPoint(x:-arrowCoordinate, y:-arrowCoordinate))
     }
+
     required public init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
     }
@@ -60,6 +61,7 @@ public class Turtle: UIView {
             arrow.stroke()
         }
     }
+    
     
     // MARK: Utility Method
     
