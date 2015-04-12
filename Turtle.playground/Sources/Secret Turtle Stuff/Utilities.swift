@@ -9,13 +9,6 @@ extension Degrees {
     }
 }
 
-public extension Int {
-    public func repeat(action:() -> ()) {
-        for _ in 1 ... self {
-            action()
-        }
-    }
-}
 
 public func repeat(numberOfTimes: Int, action:() -> ()) {
     for _ in 1 ... numberOfTimes {
@@ -23,10 +16,3 @@ public func repeat(numberOfTimes: Int, action:() -> ()) {
     }
 }
 
-func repeat(numberOfTimes: Int)( action:() -> ()) {
-    for _ in 1 ... numberOfTimes {
-        action()
-    }
-}
-
-public let doThreeTimes = repeat(3)

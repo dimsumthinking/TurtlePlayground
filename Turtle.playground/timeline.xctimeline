@@ -93,8 +93,13 @@
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "#CharacterRangeLen=1&amp;CharacterRangeLoc=0&amp;EndingColumnNumber=7&amp;EndingLineNumber=0&amp;StartingColumnNumber=1&amp;StartingLineNumber=0&amp;Timestamp=450536125.448387"
+         documentLocation = "#CharacterRangeLen=0&amp;CharacterRangeLoc=0&amp;EndingColumnNumber=7&amp;EndingLineNumber=0&amp;StartingColumnNumber=1&amp;StartingLineNumber=0&amp;Timestamp=450536378.022277"
          lockedSize = "{504, 263}"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "#CharacterRangeLen=1&amp;CharacterRangeLoc=0&amp;EndingColumnNumber=7&amp;EndingLineNumber=0&amp;StartingColumnNumber=1&amp;StartingLineNumber=0&amp;Timestamp=450536378.022428"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
