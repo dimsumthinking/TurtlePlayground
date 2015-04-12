@@ -13,7 +13,7 @@ public class Turtle: UIView {
     private var arrow = UIBezierPath()
    
     private var colors = [initialPathColor]
-    private var headingInRadians: Double = 0
+    private var headingInRadians: Radians = 0
     
     // MARK: Initializers
     
@@ -131,11 +131,11 @@ public class Turtle: UIView {
     
     // MARK: Experimental Curving Stuff
     
-    private func radialAngle() -> Double {
+    private func radialAngle() -> Radians {
         return Double(atan2(path.currentPoint.y - center.y, path.currentPoint.x - center.x))
     }
     
-    private func curveTo(#x: Double, y: Double, withHeading radians: Double) {
+    private func curveTo(#x: Double, y: Double, withHeading radians: Radians) {
         if penIsDown {
             let currentX = Double(path.currentPoint.x)
             let currentY = Double(path.currentPoint.y)
@@ -150,7 +150,7 @@ public class Turtle: UIView {
         headingInRadians = radians
     }
     
-    private func halfLoop(endingRadius: Double, endingRadians: Double, firstHalf: Bool) {
+    private func halfLoop(endingRadius: Double, endingRadians: Radians, firstHalf: Bool) {
         let direction = firstHalf ? endingRadians + 3 * M_PI / 2 : endingRadians + M_PI/2
         let endx = Double(center.x) + endingRadius * cos(endingRadians)
         let endy = Double(center.y) + endingRadius * sin(endingRadians)
