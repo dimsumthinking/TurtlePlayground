@@ -9,6 +9,7 @@ A few preliminary notes:
 * Make the turtle move by typing in "forward()". Make the turtle turn by typing in "right()".
 * Create routines and your own functions.
 * I'm experimenting with custom operators. We can draw a square like this:
+
 4◊ {                 // this character is shift - option - v
 
      100»            // this character is shift - option - \
