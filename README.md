@@ -10,8 +10,11 @@ A few preliminary notes:
 * Create routines and your own functions.
 * I'm experimenting with custom operators. We can draw a square like this:
 4◊ {                 // this character is shift - option - v
+
      100»            // this character is shift - option - \
+
      90¬             // this character is shift - l
+
 }
 
 I am working on a book that will serve as a tutorial using this playground. It will be available soon.
