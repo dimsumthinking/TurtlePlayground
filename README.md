@@ -14,7 +14,7 @@ A few preliminary notes:
 
      100»            // this character is shift - option - \
 
-     90¬             // this character is shift - l
+     90¬             // this character is option - l
 
 }
 
