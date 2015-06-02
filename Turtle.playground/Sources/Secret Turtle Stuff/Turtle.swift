@@ -25,15 +25,15 @@ public class Turtle: UIView {
         path.lineWidth = lineWidth
         layer.borderColor = borderColor.CGColor
         layer.borderWidth = 4
-        createArrow()
+        //createArrow()
     }
     
-    private func createArrow() {
-            arrow.lineWidth = lineWidth
-            arrow.moveToPoint(CGPoint(x:-arrowCoordinate, y:arrowCoordinate))
-            arrow.addLineToPoint(CGPoint(x:arrowCoordinate, y:0))
-            arrow.addLineToPoint(CGPoint(x:-arrowCoordinate, y:-arrowCoordinate))
-    }
+//    private func createArrow() {
+//            arrow.lineWidth = lineWidth
+//            arrow.moveToPoint(CGPoint(x:-arrowCoordinate, y:arrowCoordinate))
+//            arrow.addLineToPoint(CGPoint(x:arrowCoordinate, y:0))
+//            arrow.addLineToPoint(CGPoint(x:-arrowCoordinate, y:-arrowCoordinate))
+//    }
 
     required public init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
@@ -43,7 +43,10 @@ public class Turtle: UIView {
     
     override  public func drawRect(rect: CGRect) {
         strokePath()
-        strokeArrow()
+        if showTurtle {
+            addSubview(Avatar().viewAt(x: path.currentPoint.x, y: path.currentPoint.y, withHeadingInRadians: headingInRadians))
+        }
+        //strokeArrow()
     }
     
     private func strokePath() {
@@ -53,14 +56,14 @@ public class Turtle: UIView {
         }
     }
     
-    private func strokeArrow() {
-        if  showTurtle {
-            arrowColor.setStroke()
-            arrow.applyTransform(CGAffineTransformMakeRotation(CGFloat(headingInRadians)))
-            arrow.applyTransform(CGAffineTransformMakeTranslation(path.currentPoint.x, path.currentPoint.y))
-            arrow.stroke()
-        }
-    }
+//    private func strokeArrow() {
+//        if  showTurtle {
+//            arrowColor.setStroke()
+//            arrow.applyTransform(CGAffineTransformMakeRotation(CGFloat(headingInRadians)))
+//            arrow.applyTransform(CGAffineTransformMakeTranslation(path.currentPoint.x, path.currentPoint.y))
+//            arrow.stroke()
+//        }
+//    }
     
     
     // MARK: Utility Method
