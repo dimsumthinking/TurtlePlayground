@@ -1,12 +1,13 @@
 import UIKit
 import CoreGraphics
-//import QuartzCore
 
 public class Turtle: UIView {
     private var showTurtle = true
     private var isPenDown = true
-    private var path = UIBezierPath()
+    var path = UIBezierPath()
     private var headingInRadians: Radians = 0
+    private let turtleIconView = UIImageView(image: UIImage(named: "Turtle.png"))
+
     
     // MARK: Initializers
     init() {
@@ -19,13 +20,27 @@ public class Turtle: UIView {
         super.init(coder:aDecoder)
     }
     
-    // MARK: Draw Method
+    // MARK: Draw Methods
     override  public func drawRect(rect: CGRect) {
         path.stroke()
         if showTurtle {
-            addSubview(Avatar.viewAt(path.currentPoint, withHeadingInRadians: headingInRadians))
+            drawAvatar()
         }
     }
+    
+    private func drawPath() {
+        path.stroke()
+    }
+    private func drawAvatar() {
+        let rotateByRadians = CGAffineTransformMakeRotation(CGFloat(headingInRadians))
+        let centerOfTurtleX = path.currentPoint.x - turtleIconView.frame.size.width/2
+        let centerOfTurtleY = path.currentPoint.y - turtleIconView.frame.size.height/2
+        let moveTurtle = CGAffineTransformMakeTranslation(centerOfTurtleX, centerOfTurtleY)
+        let turtleTransform =  CGAffineTransformConcat(rotateByRadians, moveTurtle)
+        turtleIconView.transform = turtleTransform
+        addSubview(turtleIconView)
+    }
+    
     
     // MARK: Turtle and Pen Appearance
     func show(turtleIsVisible: Bool){

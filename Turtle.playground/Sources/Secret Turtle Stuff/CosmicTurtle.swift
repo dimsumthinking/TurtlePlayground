@@ -2,21 +2,16 @@ import UIKit
 import CoreGraphics
 
 public class CosmicTurtle : Turtle {
-//    private var showTurtle = true
-//    private var penIsDown = true
-//
-//    private var path = UIBezierPath()
-    //    private var paths = [UIBezierPath]()
-//   
-    //    private var colors = [initialPathColor]
-//    private var headingInRadians: Radians = 0
-//    
-//    // MARK: Initializers
-//    
+
+        private var paths = [UIBezierPath]()
+        private var colors = [PenColor]()
+
+    // MARK: Initializers
     override init() {
         //paths.append(path)
         super.init()
         backgroundColor = UIColor.blackColor()
+        paths.append(path)
     }
 
     required public init(coder aDecoder: NSCoder) {
@@ -56,18 +51,5 @@ public class CosmicTurtle : Turtle {
 //        let nextColor = currentColor.next()
 //        penColor(nextColor)
 //    }
-//
-
-//    
-//    func clear() {
-//        colors = [colors.last!]
-//        path = UIBezierPath()
-//        path.lineWidth = lineWidth
-//        paths = [path]
-//        headingInRadians = 0
-//        home()
-//    }
-//    
-
-
+   
 }
