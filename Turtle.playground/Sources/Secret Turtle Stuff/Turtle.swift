@@ -1,8 +1,6 @@
 import UIKit
 import CoreGraphics
-import QuartzCore
-
-public let turtle = Turtle()
+//import QuartzCore
 
 public class Turtle: UIView {
     private var showTurtle = true
@@ -25,7 +23,7 @@ public class Turtle: UIView {
     override  public func drawRect(rect: CGRect) {
         path.stroke()
         if showTurtle {
-            addSubview(Avatar().viewAt(path.currentPoint, withHeadingInRadians: headingInRadians))
+            addSubview(Avatar.viewAt(path.currentPoint, withHeadingInRadians: headingInRadians))
         }
     }
     
