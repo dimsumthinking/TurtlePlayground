@@ -25,7 +25,7 @@ public class Turtle: UIView {
     override  public func drawRect(rect: CGRect) {
         path.stroke()
         if showTurtle {
-            addSubview(Avatar().viewAt(x: path.currentPoint.x, y: path.currentPoint.y, withHeadingInRadians: headingInRadians))
+            addSubview(Avatar().viewAt(path.currentPoint, withHeadingInRadians: headingInRadians))
         }
     }
     
