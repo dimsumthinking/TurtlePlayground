@@ -17,6 +17,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 playground.xcworkspace
+timeline.xctimeline
 
 # CocoaPods
 #
