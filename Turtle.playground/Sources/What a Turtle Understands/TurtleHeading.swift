@@ -1,11 +1,5 @@
 // MARK: - right -
 
-postfix operator ¬ {} // option - l
-
-public postfix func ¬ (degrees: Int) {
-    right(degrees)
-}
-
 public func right(degrees: Double) {
     turtle.increaseHeadingBy(degrees)
 }
