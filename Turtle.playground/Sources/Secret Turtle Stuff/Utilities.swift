@@ -19,9 +19,3 @@ public func repeat(numberOfTimes: Int, action:() -> ()) {
 private func repeat(numberOfTimes: Int)( action:() -> ()) {
     repeat(numberOfTimes, action)
 }
-
-postfix operator ◊ {} //shift - option - v
-
-public postfix func ◊(numberOfTimes:Int) -> (() -> ()) -> () {
-    return repeat(numberOfTimes)
-}
