@@ -6,154 +6,64 @@ public let turtle = Turtle()
 
 public class Turtle: UIView {
     private var showTurtle = true
-    private var penIsDown = true
-
+    private var isPenDown = true
     private var path = UIBezierPath()
-    private var paths = [UIBezierPath]()
-   
-    private var colors = [initialPathColor]
     private var headingInRadians: Radians = 0
     
     // MARK: Initializers
-    
     init() {
-        super.init(frame: environmentFrame)
-        backgroundColor = environmentColor
-        paths.append(path)
+        super.init(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
+        backgroundColor = UIColor(red: 0.2, green: 1.0, blue: 1.0, alpha: 0.25)
         path.moveToPoint(center)
-        path.lineWidth = lineWidth
-        layer.borderColor = borderColor.CGColor
-        layer.borderWidth = 4
+        path.lineWidth = 2
     }
-    
-
     required public init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
     }
     
-    // MARK: Draw Methods
-    
+    // MARK: Draw Method
     override  public func drawRect(rect: CGRect) {
-        strokePath()
+        path.stroke()
         if showTurtle {
             addSubview(Avatar().viewAt(x: path.currentPoint.x, y: path.currentPoint.y, withHeadingInRadians: headingInRadians))
         }
     }
     
-    private func strokePath() {
-        for (index, path) in enumerate(paths) {
-            colors[index].color.setStroke()
-            path.stroke()
-        }
+    // MARK: Turtle and Pen Appearance
+    func show(turtleIsVisible: Bool){
+        showTurtle = turtleIsVisible
+    }
+    func penDown(penIsDown: Bool) {
+        self.isPenDown = penIsDown
     }
     
-    
-    
-    // MARK: Utility Method
-    
+    // MARK: Turtle location
     private func moveTo(#x:Double, y: Double) {
-        if penIsDown {
+        if isPenDown {
             path.addLineToPoint(CGPoint(x: x, y: y))
         } else {
             path.moveToPoint(CGPoint(x: x, y: y))
         }
     }
-    
-    // MARK: Turtle's Internal API
-    
-    func show(turtleIsVisible: Bool){
-        showTurtle = turtleIsVisible
-    }
-    
-    func penDown(penIsDown: Bool) {
-        self.penIsDown = penIsDown
-    }
-    
-    func penColor(penColor: PenColor) {
-        let currentPoint = path.currentPoint
-        path = UIBezierPath()
-        path.lineWidth = lineWidth
-        path.moveToPoint(currentPoint)
-        paths.append( path)
-        colors.append(penColor)
-    }
-    
-    func nextColor() {
-        let currentColor = colors.last!
-        let nextColor = currentColor.next()
-        penColor(nextColor)
-    }
-
     func home() {
-        let penIsDown = self.penIsDown
-        self.penIsDown = false
+        let isPenDown = self.isPenDown
+        self.isPenDown = false
         path.moveToPoint(center)
-        self.penIsDown = penIsDown
+        self.isPenDown = isPenDown
     }
-    
-    func clear() {
-        colors = [colors.last!]
-        path = UIBezierPath()
-        path.lineWidth = lineWidth
-        paths = [path]
-        headingInRadians = 0
-        home()
-    }
-    
     func forward(distance: Double) {
-        let dx = distance * cos(headingInRadians) * multiplier
-        let dy = distance * sin(headingInRadians) * multiplier
+        let dx = distance * cos(headingInRadians)
+        let dy = distance * sin(headingInRadians)
         let currentX = Double(path.currentPoint.x)
         let currentY = Double(path.currentPoint.y)
         moveTo(x: currentX + dx, y: currentY + dy)
     }
     
+    // MARK: Turtle Direction
     func increaseHeadingBy(degrees: Degrees) {
         headingInRadians += degrees.toRadians()
     }
     func setHeadingTo(direction: CompassDirection) {
         headingInRadians = direction.degrees().toRadians()
-    }
-    
-    // MARK: Experimental Curving Stuff
-    
-    private func radialAngle() -> Radians {
-        return Double(atan2(path.currentPoint.y - center.y, path.currentPoint.x - center.x))
-    }
-    
-    private func curveTo(#x: Double, y: Double, withHeading radians: Radians) {
-        if penIsDown {
-            let currentX = Double(path.currentPoint.x)
-            let currentY = Double(path.currentPoint.y)
-            path.addCurveToPoint(CGPoint(x: x, y: y),
-                controlPoint1: CGPoint(x: currentX +  bezierOffset * cos(headingInRadians),
-                    y: currentY + bezierOffset * sin(headingInRadians)),
-                controlPoint2: CGPoint(x: x - bezierOffset * cos(radians),
-                    y: y - bezierOffset *  sin(radians)))
-        } else {
-            path.moveToPoint(CGPoint(x: x, y: y))
-        }
-        headingInRadians = radians
-    }
-    
-    private func halfLoop(endingRadius: Double, endingRadians: Radians, firstHalf: Bool) {
-        let direction = firstHalf ? endingRadians + 3 * M_PI / 2 : endingRadians + M_PI/2
-        let endx = Double(center.x) + endingRadius * cos(endingRadians)
-        let endy = Double(center.y) + endingRadius * sin(endingRadians)
-        curveTo(x: endx, y: endy, withHeading:  direction)
-    }
-    
-    func loopWithAngle(degrees: Degrees) {
-        let xDistance = path.currentPoint.x - center.x
-        let yDistance = path.currentPoint.y - center.y
-        let radiansForward = degrees.toRadians()
-        let magnitude = Double(sqrt(xDistance * xDistance + yDistance * yDistance))
-        headingInRadians = radialAngle() + M_PI / 2
-        halfLoop(magnitude * 0.15, endingRadians: radialAngle() + radiansForward/2, firstHalf: true)
-        halfLoop(magnitude, endingRadians: radialAngle() + radiansForward/2, firstHalf: false)
-    }
-    
-    public func curveTo(#x:Double, y: Double, degrees: Double) {
-        curveTo(x: x, y: y, withHeading: degrees.toRadians())
     }
 }

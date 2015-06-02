@@ -1,7 +1,20 @@
+forward()
+right()
+forward()
+left()
+forward()
 
-
-
+right(60)
+forward()
+right(60)
+forward()
+right(60)
+forward()
+right(60)
+forward()
+left(60)
+forward()
+right()
+forward()
 
 turtle
-
-

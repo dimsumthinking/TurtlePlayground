@@ -6,15 +6,14 @@ public func penUp() {
 public func penDown() {
     turtle.penDown(true)
 }
-public func clear() {
-    turtle.clear()
-}
-public func penColor(penColor:PenColor){
-    turtle.penColor(penColor)
-}
 
-public func nextColor() {
-    turtle.nextColor()
-}
+//
+//public func penColor(penColor:PenColor){
+//    turtle.penColor(penColor)
+//}
+
+//public func nextColor() {
+//    turtle.nextColor()
+//}
 
 
