@@ -10,7 +10,6 @@ public class Turtle: UIView {
 
     private var path = UIBezierPath()
     private var paths = [UIBezierPath]()
-    private var arrow = UIBezierPath()
    
     private var colors = [initialPathColor]
     private var headingInRadians: Radians = 0
@@ -25,15 +24,8 @@ public class Turtle: UIView {
         path.lineWidth = lineWidth
         layer.borderColor = borderColor.CGColor
         layer.borderWidth = 4
-        //createArrow()
     }
     
-//    private func createArrow() {
-//            arrow.lineWidth = lineWidth
-//            arrow.moveToPoint(CGPoint(x:-arrowCoordinate, y:arrowCoordinate))
-//            arrow.addLineToPoint(CGPoint(x:arrowCoordinate, y:0))
-//            arrow.addLineToPoint(CGPoint(x:-arrowCoordinate, y:-arrowCoordinate))
-//    }
 
     required public init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
@@ -46,7 +38,6 @@ public class Turtle: UIView {
         if showTurtle {
             addSubview(Avatar().viewAt(x: path.currentPoint.x, y: path.currentPoint.y, withHeadingInRadians: headingInRadians))
         }
-        //strokeArrow()
     }
     
     private func strokePath() {
@@ -56,14 +47,6 @@ public class Turtle: UIView {
         }
     }
     
-//    private func strokeArrow() {
-//        if  showTurtle {
-//            arrowColor.setStroke()
-//            arrow.applyTransform(CGAffineTransformMakeRotation(CGFloat(headingInRadians)))
-//            arrow.applyTransform(CGAffineTransformMakeTranslation(path.currentPoint.x, path.currentPoint.y))
-//            arrow.stroke()
-//        }
-//    }
     
     
     // MARK: Utility Method
