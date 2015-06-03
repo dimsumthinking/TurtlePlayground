@@ -5,8 +5,8 @@ public class Turtle: UIView {
     private var showTurtle = true
     private var isPenDown = true
     var path = UIBezierPath()
-    private var headingInRadians: Radians = 0
-    private let turtleIconView = UIImageView(image: UIImage(named: "Turtle.png"))
+    var headingInRadians: Radians = 0
+    var turtleIconView = UIImageView(image: UIImage(named: "Turtle.png"))
 
     
     // MARK: Initializers
@@ -22,16 +22,16 @@ public class Turtle: UIView {
     
     // MARK: Draw Methods
     override  public func drawRect(rect: CGRect) {
-        path.stroke()
+        drawPath()
         if showTurtle {
             drawAvatar()
         }
     }
     
-    private func drawPath() {
+    func drawPath() {
         path.stroke()
     }
-    private func drawAvatar() {
+    func drawAvatar() {
         let rotateByRadians = CGAffineTransformMakeRotation(CGFloat(headingInRadians))
         let centerOfTurtleX = path.currentPoint.x - turtleIconView.frame.size.width/2
         let centerOfTurtleY = path.currentPoint.y - turtleIconView.frame.size.height/2

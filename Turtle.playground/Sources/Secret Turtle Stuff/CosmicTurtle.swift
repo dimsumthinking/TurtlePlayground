@@ -2,16 +2,16 @@ import UIKit
 import CoreGraphics
 
 public class CosmicTurtle : Turtle {
+    private var paths = [UIBezierPath]()
+    private var colors = [PenColor]()
 
-        private var paths = [UIBezierPath]()
-        private var colors = [PenColor]()
 
     // MARK: Initializers
     override init() {
-        //paths.append(path)
         super.init()
         backgroundColor = UIColor.blackColor()
         paths.append(path)
+        turtleIconView = UIImageView(image: UIImage(named: "GreenTurtle.png"))
     }
 
     required public init(coder aDecoder: NSCoder) {
@@ -34,6 +34,21 @@ public class CosmicTurtle : Turtle {
 //        }
 //    }
 //    
+    override func drawPath() {
+        UIColor.whiteColor().setStroke()
+        path.stroke()
+    }
+    override func drawAvatar() {
+        let rotateByRadians = CGAffineTransformMakeRotation(CGFloat(headingInRadians))
+        let centerOfTurtleX = path.currentPoint.x - turtleIconView.frame.size.width/2
+        let centerOfTurtleY = path.currentPoint.y - turtleIconView.frame.size.height/2
+        let moveTurtle = CGAffineTransformMakeTranslation(centerOfTurtleX, centerOfTurtleY)
+        let turtleTransform =  CGAffineTransformConcat(rotateByRadians, moveTurtle)
+        turtleIconView.transform = turtleTransform
+        addSubview(turtleIconView)
+    }
+    
+    
 //    
 
 //    
