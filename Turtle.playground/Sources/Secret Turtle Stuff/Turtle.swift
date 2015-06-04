@@ -1,6 +1,7 @@
 import UIKit
 import CoreGraphics
 
+
 public class Turtle: UIView {
     private var showTurtle = true
     private var isPenDown = true
@@ -18,6 +19,7 @@ public class Turtle: UIView {
             UIColor(red: 0.2, green: 1.0, blue: 1.0, alpha: 0.1)
         path.moveToPoint(center)
         path.lineWidth = lineWidth
+        paths.append(path)
     }
     required public init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)

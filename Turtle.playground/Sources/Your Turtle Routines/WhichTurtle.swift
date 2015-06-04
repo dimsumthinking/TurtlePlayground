@@ -1,2 +1,1 @@
-public let turtle = CosmicTurtle()
-//Turtle()
+public let turtle = Turtle()

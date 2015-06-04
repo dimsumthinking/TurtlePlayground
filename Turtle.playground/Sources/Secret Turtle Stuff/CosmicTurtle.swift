@@ -1,6 +1,7 @@
 import UIKit
 import CoreGraphics
 
+
 public class CosmicTurtle : Turtle {
     
 
@@ -9,7 +10,6 @@ public class CosmicTurtle : Turtle {
     override init() {
         super.init()
         backgroundColor = UIColor.blackColor()
-        paths.append(path)
         turtleIconView = UIImageView(image: UIImage(named: "RedTurtle.png"))
         colors = [PenColor.Green]
     }
