@@ -10,6 +10,8 @@ A few preliminary notes:
 * Make the turtle move by typing in "forward()". Make the turtle turn by typing in "right()".
 * Create routines and your own functions.
 * I've removed the custom operators for forward and back. They were cute and fun but not good pedagogy. You can add them back.
+* To see the colors, change to CosmicTurtle() in WhichTurtle
+
 I am working on a book that will serve as a tutorial using this playground. It will be available soon.
 
 This project is presented without any sort of warranty - use at your own risk.
