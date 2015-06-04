@@ -2,7 +2,7 @@ import UIKit
 import CoreGraphics
 
 
-public class Turtle: UIView {
+public class TurtleView: UIView {
     private var showTurtle = true
     private var isPenDown = true
     var path = UIBezierPath()

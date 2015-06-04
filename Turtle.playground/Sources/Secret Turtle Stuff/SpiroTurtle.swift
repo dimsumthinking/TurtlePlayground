@@ -3,7 +3,7 @@ import CoreGraphics
 import QuartzCore
 
 
-public class SpiroTurtle: Turtle {
+public class SpiroTurtle: TurtleView {
 //    private var showTurtle = true
 //    private var penIsDown = true
 //

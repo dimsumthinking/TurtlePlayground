@@ -2,7 +2,7 @@ import UIKit
 import CoreGraphics
 
 
-public class CosmicTurtle : Turtle {
+public class CosmicTurtle : TurtleView {
     
 
 
