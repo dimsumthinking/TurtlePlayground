@@ -7,14 +7,17 @@ public class Turtle: UIView {
     var path = UIBezierPath()
     var headingInRadians: Radians = 0
     var turtleIconView = UIImageView(image: UIImage(named: "Turtle.png"))
-
+    let lineWidth = CGFloat(4)
+    var paths = [UIBezierPath]()
+    var colors = [PenColor.Black]
     
     // MARK: Initializers
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
-        backgroundColor = UIColor(red: 0.2, green: 1.0, blue: 1.0, alpha: 0.25)
+        backgroundColor = //UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+            UIColor(red: 0.2, green: 1.0, blue: 1.0, alpha: 0.1)
         path.moveToPoint(center)
-        path.lineWidth = 2
+        path.lineWidth = lineWidth
     }
     required public init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
@@ -29,7 +32,10 @@ public class Turtle: UIView {
     }
     
     func drawPath() {
-        path.stroke()
+        for (index, path) in enumerate(paths) {
+            colors[index].color.setStroke()
+            path.stroke()
+        }
     }
     func drawAvatar() {
         let rotateByRadians = CGAffineTransformMakeRotation(CGFloat(headingInRadians))
@@ -48,6 +54,24 @@ public class Turtle: UIView {
     }
     func penDown(penIsDown: Bool) {
         self.isPenDown = penIsDown
+    }
+    
+    // MARK: Pen Color
+    func penColor(penColor: PenColor) {
+        let currentPoint = path.currentPoint
+        path = UIBezierPath()
+        path.lineWidth = lineWidth
+        path.moveToPoint(currentPoint)
+        paths.append( path)
+        colors.append(penColor)
+    }
+    
+    func nextColor() {
+        let currentColor = colors.last!
+        if currentColor != .Black {
+            let nextColor = currentColor.next()
+            penColor(nextColor)
+        }
     }
     
     // MARK: Turtle location
@@ -79,4 +103,5 @@ public class Turtle: UIView {
     func setHeadingTo(direction: CompassDirection) {
         headingInRadians = direction.degrees().toRadians()
     }
+    
 }

@@ -2,8 +2,7 @@ import UIKit
 import CoreGraphics
 
 public class CosmicTurtle : Turtle {
-    private var paths = [UIBezierPath]()
-    private var colors = [PenColor]()
+    
 
 
     // MARK: Initializers
@@ -11,60 +10,37 @@ public class CosmicTurtle : Turtle {
         super.init()
         backgroundColor = UIColor.blackColor()
         paths.append(path)
-        turtleIconView = UIImageView(image: UIImage(named: "GreenTurtle.png"))
+        turtleIconView = UIImageView(image: UIImage(named: "RedTurtle.png"))
+        colors = [PenColor.Green]
     }
 
     required public init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
     }
-//
-//    // MARK: Draw Methods
-//    
-//    override  public func drawRect(rect: CGRect) {
-//        strokePath()
-//        if showTurtle {
-//            addSubview(Avatar().viewAt(x: path.currentPoint.x, y: path.currentPoint.y, withHeadingInRadians: headingInRadians))
-//        }
-//    }
-//    
-//    private func strokePath() {
-//        for (index, path) in enumerate(paths) {
-//            colors[index].color.setStroke()
-//            path.stroke()
-//        }
-//    }
-//    
-    override func drawPath() {
-        UIColor.whiteColor().setStroke()
-        path.stroke()
-    }
-    override func drawAvatar() {
-        let rotateByRadians = CGAffineTransformMakeRotation(CGFloat(headingInRadians))
-        let centerOfTurtleX = path.currentPoint.x - turtleIconView.frame.size.width/2
-        let centerOfTurtleY = path.currentPoint.y - turtleIconView.frame.size.height/2
-        let moveTurtle = CGAffineTransformMakeTranslation(centerOfTurtleX, centerOfTurtleY)
-        let turtleTransform =  CGAffineTransformConcat(rotateByRadians, moveTurtle)
-        turtleIconView.transform = turtleTransform
-        addSubview(turtleIconView)
-    }
     
-    
-//    
+    // MARK: Draw Methods
 
-//    
-//    func penColor(penColor: PenColor) {
-//        let currentPoint = path.currentPoint
-//        path = UIBezierPath()
-//        path.lineWidth = lineWidth
-//        path.moveToPoint(currentPoint)
-//        paths.append( path)
-//        colors.append(penColor)
-//    }
-//    
-//    func nextColor() {
-//        let currentColor = colors.last!
-//        let nextColor = currentColor.next()
-//        penColor(nextColor)
-//    }
+    override func drawAvatar() {
+        colorAvatar()
+        super.drawAvatar()
+    }
+    
+    func colorAvatar() {
+        let turtleImage = UIImage(named:"RedTurtle.png")!
+        let targetImage = CIImage(CGImage: turtleImage.CGImage)
+        let angle = Float(colors.last!.hue * 2.0 * M_PI)
+        
+        let hueAdjuster = CIFilter(name: "CIHueAdjust", withInputParameters: [kCIInputImageKey : targetImage  ,
+            kCIInputAngleKey : NSNumber(float: angle)])
+        let resultImage = hueAdjuster.outputImage
+        
+        
+        //let resultImage = colorControls.outputImage
+        let finalImage = UIImage(CIImage: resultImage)
+        turtleIconView.image = finalImage
+    }
+    
+    
+
    
 }
