@@ -1,1 +1,1 @@
-public let turtle = TurtleView()
+public var turtle = Turtle(color: .Black)

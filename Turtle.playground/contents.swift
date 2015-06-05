@@ -2,4 +2,4 @@ forward()
 right()
 forward()
 
-turtle
+turtle.view

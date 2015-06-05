@@ -26,8 +26,4 @@ public func back() {
     back(50.0)
 }
 
-// MARK: - home -
 
-public func home() {
-    turtle.home()
-}
