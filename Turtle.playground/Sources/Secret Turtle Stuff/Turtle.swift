@@ -2,58 +2,81 @@ import UIKit
 
 public struct Turtle {
         
-    private var currentPath: Path 
+    private var currentPath: Path
     public let view: TurtleView
-    private let avatar: Avatar
+    private var avatar: Avatar
+    private let turtleType: TurtleType
     
-    init(color: PenColor) {
+    // MARK: - Initializers
+    
+    public init(turtleType: TurtleType = .Plain) {
+        self.turtleType = turtleType
         let terrariumFrame = CGRect(x: 0, y: 0, width: 600, height: 600)
-        view = TurtleView(frame: terrariumFrame)
-        currentPath = Path(penColor: color, isPenDown: true, center: CGPoint(x: view.center.x , y: view.center.y))
-        avatar = Avatar()
+        avatar = Avatar(imageName: turtleType.imageName, penColor: turtleType.penColor)
+        view = TurtleView(frame: terrariumFrame, avatarView: avatar.view, backgroundColor: turtleType.backgroundColor)
+        currentPath = Path(penColor: turtleType.penColor, isPenDown: true, startingPoint: CGPoint(x: view.center.x , y: view.center.y))
         view.addPath(currentPath)
+        updateAvatar()
+    }
+    private init(currentPath: Path, view: TurtleView, avatar: Avatar, turtleType: TurtleType){
+        self.currentPath = currentPath
+        self.view = view
+        self.avatar = avatar
+        self.turtleType = turtleType
+        updateAvatar()
+    }
+    
+    // MARK: - Posiiton
+
+    func forward(distance: Double)  {
+        let path = currentPath.forward(distance, inDirection: avatar.headingInRadians)
+        turtle = Turtle(currentPath: path, view: view, avatar: avatar, turtleType: turtleType)
+    }
+    
+    func jumpTo(#x: Double, y: Double) {
+        turtle = Turtle(currentPath: currentPath.jumpTo(x: x, y: y), view: view, avatar: avatar, turtleType: turtleType)
+    }
+    func home() {
+        jumpTo(x: Double(view.center.x), y: Double(view.center.y))
     }
 
-    mutating func forward(distance: Double) {
-        currentPath = currentPath.forward(distance, inDirection: avatar.headingInRadians)
-    }
+    // MARK: - Direction
     
     func increaseHeadingBy(degrees: Degrees) {
-        avatar.increaseHeadingBy(degrees)
+        turtle = Turtle(currentPath: currentPath, view: view, avatar: avatar.increaseHeadingBy(degrees), turtleType: turtleType)
+
     }
     func setHeadingTo(direction: CompassDirection) {
-        avatar.setHeadingTo(direction)
+        turtle = Turtle(currentPath: currentPath, view: view, avatar: avatar.setHeadingTo(direction), turtleType: turtleType)
     }
     
-    // MARK: Turtle and Pen Appearance
+    // MARK: - Visibility
+    
     func show(isVisible: Bool){
-        avatar.show(isVisible)
+        turtle = Turtle(currentPath: currentPath, view: view, avatar: avatar.show(isVisible), turtleType: turtleType)
     }
-    mutating func penDown(isPenDown: Bool) {
-        currentPath = currentPath.penDown(isPenDown)
-    }
-    mutating func jumpTo(#x: Double, y: Double) {
-        currentPath = currentPath.jumpTo(x: x, y: y)
-    }
+    func penDown(isPenDown: Bool) {
+        turtle = Turtle(currentPath: currentPath.penDown(isPenDown), view: view, avatar: avatar, turtleType: turtleType)
 
-    // MARK: Pen Color
+    }
+    
+    // MARK: - Colors
+    
     func penColor(penColor: PenColor) {
-//        let currentPoint = path.currentPoint
-//        path = UIBezierPath()
-//        path.lineWidth = lineWidth
-//        path.moveToPoint(currentPoint)
-//        paths.append( path)
-//        colors.append(penColor)
+        if turtleType != .Plain {
+            let path =  Path(penColor: penColor, isPenDown: currentPath.isPenDown, startingPoint:currentPath.currentPoint , uniqueID: currentPath.uniqueID + 1)
+            view.addPath(path)
+            turtle = Turtle(currentPath: path, view: view, avatar: avatar.penColor(penColor), turtleType: turtleType)
+        }
     }
-//    
+    
     func nextColor() {
-//        let currentColor = colors.last!
-//        if currentColor != .Black {
-//            let nextColor = currentColor.next()
-//            penColor(nextColor)
-//        }
+        penColor(currentPath.penColor.next())
     }
     
+    // MARK: Utility
     
-
+    private func updateAvatar() {
+        view.updateAvatarTransform(avatar.positionTransform(currentPath.currentPoint))
+    }
 }

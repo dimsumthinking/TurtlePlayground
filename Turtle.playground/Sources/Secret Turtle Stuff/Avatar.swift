@@ -1,30 +1,66 @@
 import UIKit
 
-class Avatar {
-    private var view = UIImageView(image: UIImage(named: "Turtle.png"))
+struct Avatar {
+    private(set) var view = UIImageView()
     private(set) var headingInRadians = 0.0
     private var isVisible = true
+    private let image: UIImage
     
-    func viewAt(currentPoint: CGPoint) -> UIImageView {
+    // MARK: - Initializers
+    
+    init(imageName: String, penColor: PenColor){
+        image = UIImage(named: imageName)!
+        view = UIImageView(image: colorAvatar(penColor))
+    }
+    
+    private init(view: UIImageView, image: UIImage, headingInRadians: Double, isVisible: Bool) {
+        self.view = view
+        self.headingInRadians = headingInRadians
+        self.isVisible = isVisible
+        self.image = image
+    }
+    
+    // MARK: - Direction
+    
+    func increaseHeadingBy(degrees: Degrees) -> Avatar {
+        return Avatar(view: view, image: image, headingInRadians: headingInRadians + degrees.toRadians(), isVisible: isVisible)
+    }
+    func setHeadingTo(direction: CompassDirection) -> Avatar {
+        return Avatar(view: view, image: image, headingInRadians: direction.degrees().toRadians(), isVisible: isVisible)
+    }
+    
+    // MARK: - Visibility
+    
+    func show(isVisible: Bool) -> Avatar { 
+        view.hidden = !isVisible
+        return Avatar(view: view, image: image,headingInRadians: headingInRadians, isVisible: isVisible)
+    }
+    
+    // MARK: - Position
+    
+    func positionTransform(currentPoint: CGPoint) -> CGAffineTransform {
         let rotateByRadians = CGAffineTransformMakeRotation(CGFloat(headingInRadians))
-        let centerOfTurtleX = currentPoint.x - view.frame.size.width/2
-        let centerOfTurtleY = currentPoint.y - view.frame.size.height/2
+        let centerOfTurtleX = currentPoint.x  - view.center.x
+        let centerOfTurtleY = currentPoint.y - view.center.y
         let moveTurtle = CGAffineTransformMakeTranslation(centerOfTurtleX, centerOfTurtleY)
         let turtleTransform =  CGAffineTransformConcat(rotateByRadians, moveTurtle)
-        view.transform = turtleTransform
-        println(view.frame)
-        
-        return view
+        return turtleTransform
     }
     
-    func increaseHeadingBy(degrees: Degrees) {
-        headingInRadians += degrees.toRadians()
-    }
-    func setHeadingTo(direction: CompassDirection) {
-        headingInRadians = direction.degrees().toRadians()
+    // MARK: - Color
+    
+    func penColor(penColor: PenColor) -> Avatar {
+        view.image = colorAvatar(penColor)
+        return Avatar(view: view, image: image, headingInRadians: headingInRadians, isVisible: isVisible)
     }
     
-    func show(isVisible: Bool){
-        self.isVisible = isVisible
+    private func colorAvatar(penColor: PenColor) -> UIImage {
+        let inputImage = CIImage(image: image)
+        let angle = penColor.hue * M_PI * 2.0
+        let hueAdjuster = CIFilter(name: "CIHueAdjust", withInputParameters: [kCIInputImageKey : inputImage  ,
+            kCIInputAngleKey : NSNumber(double: angle)])
+        let resultImage = hueAdjuster.outputImage
+        return UIImage(CIImage: resultImage)!
     }
+    
 }

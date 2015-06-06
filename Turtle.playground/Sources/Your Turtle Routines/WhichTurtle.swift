@@ -1,1 +1,1 @@
-public var turtle = Turtle(color: .Black)
+public var turtle = Turtle()

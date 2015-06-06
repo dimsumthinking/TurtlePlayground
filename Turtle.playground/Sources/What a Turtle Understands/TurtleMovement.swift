@@ -26,4 +26,8 @@ public func back() {
     back(50.0)
 }
 
+public func home() {
+    turtle.home()
+}
+
 
