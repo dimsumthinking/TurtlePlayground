@@ -18,7 +18,7 @@ public class TurtleView: UIView {
     }
     
     // MARK: Draw Methods
-    override  public func drawRect(rect: CGRect) { println("number:\(paths.count)")
+    override  public func drawRect(rect: CGRect) { 
         for path in paths {
             path.penColor.color.setStroke()
             path.bezierPath.stroke()

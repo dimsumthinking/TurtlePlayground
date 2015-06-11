@@ -28,7 +28,7 @@ struct Path {
     
     // MARK: - Position
     
-    func moveTo(#x:Double, y: Double) -> Path  {    
+    func moveTo(x x:Double, y: Double) -> Path  {
         if isPenDown {
             bezierPath.addLineToPoint(CGPoint(x: x, y: y))
         } else {
@@ -45,7 +45,7 @@ struct Path {
         return moveTo(x: currentX + dx, y: currentY + dy)
     }
     
-    func jumpTo(#x: Double, y: Double) -> Path {
+    func jumpTo(x x: Double, y: Double) -> Path {
         return penDown(false).moveTo(x: x, y: y).penDown(true)
     }
 

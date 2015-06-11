@@ -33,7 +33,7 @@ public struct Turtle {
         turtle = Turtle(currentPath: path, view: view, avatar: avatar, turtleType: turtleType)
     }
     
-    func jumpTo(#x: Double, y: Double) {
+    func jumpTo(x x: Double, y: Double) {
         turtle = Turtle(currentPath: currentPath.jumpTo(x: x, y: y), view: view, avatar: avatar, turtleType: turtleType)
     }
     func home() {
@@ -42,7 +42,7 @@ public struct Turtle {
 
     // MARK: - Direction
     
-    func increaseHeadingBy(degrees: Degrees) {
+    func increaseHeadingBy(degrees: Double) {
         turtle = Turtle(currentPath: currentPath, view: view, avatar: avatar.increaseHeadingBy(degrees), turtleType: turtleType)
 
     }
@@ -80,3 +80,15 @@ public struct Turtle {
         view.updateAvatarTransform(avatar.positionTransform(currentPath.currentPoint))
     }
 }
+
+extension Turtle: CustomPlaygroundQuickLookable {
+    public func customPlaygroundQuickLook() -> PlaygroundQuickLook {
+        return PlaygroundQuickLook(reflecting: view)
+    }
+
+}
+
+
+
+
+

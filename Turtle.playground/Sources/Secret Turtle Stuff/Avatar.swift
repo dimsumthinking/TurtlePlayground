@@ -22,11 +22,11 @@ struct Avatar {
     
     // MARK: - Direction
     
-    func increaseHeadingBy(degrees: Degrees) -> Avatar {
-        return Avatar(view: view, image: image, headingInRadians: headingInRadians + degrees.toRadians(), isVisible: isVisible)
+    func increaseHeadingBy(degrees: Double) -> Avatar {
+        return Avatar(view: view, image: image, headingInRadians: headingInRadians + degrees/180 * M_PI , isVisible: isVisible)
     }
     func setHeadingTo(direction: CompassDirection) -> Avatar {
-        return Avatar(view: view, image: image, headingInRadians: direction.degrees().toRadians(), isVisible: isVisible)
+        return Avatar(view: view, image: image, headingInRadians: direction.degrees()/180 * M_PI, isVisible: isVisible)
     }
     
     // MARK: - Visibility
@@ -55,12 +55,13 @@ struct Avatar {
     }
     
     private func colorAvatar(penColor: PenColor) -> UIImage {
-        let inputImage = CIImage(image: image)
         let angle = penColor.hue * M_PI * 2.0
-        let hueAdjuster = CIFilter(name: "CIHueAdjust", withInputParameters: [kCIInputImageKey : inputImage  ,
-            kCIInputAngleKey : NSNumber(double: angle)])
-        let resultImage = hueAdjuster.outputImage
-        return UIImage(CIImage: resultImage)!
+        guard let inputImage = CIImage(image: image),
+            let hueAdjuster = CIFilter(name: "CIHueAdjust", withInputParameters: [kCIInputImageKey : inputImage  ,
+                kCIInputAngleKey : NSNumber(double: angle)])  else {
+                    return image
+        }
+        return UIImage(CIImage: hueAdjuster.outputImage)
     }
     
 }

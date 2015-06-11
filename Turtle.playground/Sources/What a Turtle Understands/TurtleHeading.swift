@@ -15,7 +15,7 @@ public func right() {
 
 // MARK: - left -
 
-public func left(_ degrees: Double = 90) {
+public func left(degrees: Double = 90) {
     turtle.increaseHeadingBy(-degrees)
 }
 
