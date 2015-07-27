@@ -13,7 +13,7 @@ public class TurtleView: UIView {
         self.backgroundColor =  backgroundColor
         addSubview(avatarView)
     }
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
     }
     
