@@ -1,6 +1,6 @@
 /*: 
 ### Before We Begin
-[TOC](Contents) | Previous | [Next](@next)
+[TOC](0Contents) | Previous | [Next](@next)
 
 ---
 We need to save the position of our target or it will constantly be moving around.

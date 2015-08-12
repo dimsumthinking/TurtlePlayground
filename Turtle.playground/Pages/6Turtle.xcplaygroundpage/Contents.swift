@@ -1,7 +1,7 @@
 /*:
 ### Turtle ([Hint](Turtle%20Hint))
 
-[TOC](Contents) | [Previous](@previous) | Next
+[TOC](0Contents) | [Previous](@previous) | Next
 
 ---
 */

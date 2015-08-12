@@ -1,7 +1,7 @@
 /*:
 ### Turtle Hints
 
-[Back](Turtle)
+[Back](6Turtle)
 
 ---
 * You can now `show()` and `hide()` the turtle.
