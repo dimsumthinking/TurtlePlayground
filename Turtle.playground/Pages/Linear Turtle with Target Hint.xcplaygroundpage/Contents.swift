@@ -1,7 +1,7 @@
 /*: 
 ### Linear Turtle with Target Hints
 
-[Back](2Linear%20Turtle%20with%20Target)
+[TOC](Contents) | [Back](Linear%20Turtle%20with%20Target)
 
 ---
 * We begin with a turtle who knows how to move `forward()` and `back()`

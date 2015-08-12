@@ -1,7 +1,7 @@
 /*:
 ### Turtle with Target Hints
 
-[Back](3Turtle%20with%20Target)
+[TOC](Contents) | [Back](Turtle%20with%20Target)
 
 ---
 * Next we add the ability to turn our turtle `right()` and `left()`

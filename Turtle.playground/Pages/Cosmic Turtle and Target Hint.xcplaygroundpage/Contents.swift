@@ -1,7 +1,7 @@
 /*:
 ### Cosmic Turtle and Target Hints
 
-[Back](5Cosmic%20Turtle%20and%20Target)
+[TOC](Contents) | [Back](Cosmic%20Turtle%20and%20Target)
 
 ---
 * The `penColor()` and `nextColor()` functions are used to set the pen's color or to cycle through them.

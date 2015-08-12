@@ -1,6 +1,6 @@
 /*: 
 ### Before We Begin
-[TOC](0Contents) | Previous | [Next](@next)
+[TOC](Contents) | [Linear Turtle with Target](Linear%20Turtle%20with%20Target)
 
 ---
 We need to save the position of our target or it will constantly be moving around.
