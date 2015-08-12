@@ -61,7 +61,7 @@ struct Avatar {
                 kCIInputAngleKey : NSNumber(double: angle)])  else {
                     return image
         }
-        return UIImage(CIImage: hueAdjuster.outputImage)
+        return UIImage(CIImage: hueAdjuster.outputImage!)
     }
     
 }
