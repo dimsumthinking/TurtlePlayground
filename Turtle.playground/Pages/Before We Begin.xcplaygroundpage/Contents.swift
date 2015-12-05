@@ -5,7 +5,7 @@
 ---
 We need to save the position of our target or it will constantly be moving around.
 
-* Find your `Documents` director. 
+* Find your `Documents` directory. 
 * Add a new folder named `Shared Playground Data` making sure that there's a space between each word.
 
 In each playground, begin by typing in the word turtle. You will also need to type return so that you get a new line.
