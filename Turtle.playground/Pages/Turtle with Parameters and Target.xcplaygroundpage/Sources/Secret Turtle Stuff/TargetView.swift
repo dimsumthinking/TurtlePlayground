@@ -3,14 +3,14 @@ import XCPlayground
 import GameKit
 
 struct Target {
-    static private let path = (XCPSharedDataDirectoryPath as NSString).stringByAppendingPathComponent("Target.plist")
+    static private let url = XCPlaygroundSharedDataDirectoryURL.URLByAppendingPathComponent("Target.plist")
     let targetView = UIImageView(image: UIImage(named: "Target.png"))
     let startingMarkerView = UIImageView(image: UIImage(named: "RightArrow.png"))
     let targetCoordinateX: Int
     let targetCoordinateY: Int
     
     init() {
-        (targetCoordinateX, targetCoordinateY) = Target.readFromFile()
+        (targetCoordinateX, targetCoordinateY) = Target.readFromURL()
         positionTargetAndStartingView()
     }
     private init(targetCoordinateX: Int, targetCoordinateY: Int) {
@@ -30,18 +30,18 @@ struct Target {
     
 
     
-    static func readFromFile() -> (Int, Int) {
-        guard let dictionary = NSDictionary(contentsOfFile: path), x = dictionary["x"] as? NSNumber, y = dictionary["y"] as? NSNumber else {
-            Target.writeToFile(x: 8 * targetWidth, y: 3 * targetHeight)
+    static func readFromURL() -> (Int, Int) {
+        guard let dictionary = NSDictionary(contentsOfURL: url), x = dictionary["x"] as? NSNumber, y = dictionary["y"] as? NSNumber else {
+            Target.writeToURL(x: 8 * targetWidth, y: 3 * targetHeight)
             return (8 * targetWidth, 3 * targetHeight)
         }
         return (x.integerValue, y.integerValue)
         
     }
     
-    static func writeToFile(x x: Int, y: Int) {
+    static func writeToURL(x x: Int, y: Int) {
         let dictionary = ["x" : x, "y" : y] as NSDictionary
-        dictionary.writeToFile(Target.path, atomically: true)
+        dictionary.writeToURL(Target.url, atomically: true)
     }
 
     
@@ -51,11 +51,8 @@ struct Target {
         let distribution = GKShuffledDistribution(lowestValue: 1, highestValue: 11)
         let x = distribution.nextInt() * targetWidth
         let y = distribution.nextInt() * targetHeight
-        Target.writeToFile(x: x, y: y)
+        Target.writeToURL(x: x, y: y)
         return Target(targetCoordinateX: x, targetCoordinateY: y)
-}
-    
-    
-    
+	}
     
 }
